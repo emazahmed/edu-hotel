@@ -1,53 +1,101 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, TextInput, Alert, Modal } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
-import { ArrowLeft, Calendar, Users, CreditCard, CircleCheck as CheckCircle } from 'lucide-react-native';
+import { ArrowLeft, Calendar, Users, CreditCard, X } from 'lucide-react-native';
 import { useAuth } from '@/contexts/AuthContext';
 import { useBooking } from '@/contexts/BookingContext';
+import CheckoutForm, { PaymentData } from '@/components/CheckoutForm';
+import OrderSummary from '@/components/OrderSummary';
+import PaymentSuccess from '@/components/PaymentSuccess';
+
+// --- Date helpers ---
+const formatInputDate = (text: string) => {
+  let cleaned = text.replace(/\D/g, '');
+  if (cleaned.length > 8) cleaned = cleaned.slice(0, 8);
+
+  if (cleaned.length >= 5) {
+    return `${cleaned.slice(0, 2)}/${cleaned.slice(2, 4)}/${cleaned.slice(4)}`;
+  } else if (cleaned.length >= 3) {
+    return `${cleaned.slice(0, 2)}/${cleaned.slice(2)}`;
+  } else {
+    return cleaned;
+  }
+};
+
+const parseFormattedDate = (formatted: string) => {
+  const parts = formatted.split('/');
+  if (parts.length !== 3) return '';
+  const [day, month, year] = parts;
+  if (!day || !month || !year) return '';
+  return `${year}-${month}-${day}`; // ISO for Date()
+};
+
+const formatDisplayDate = (dateString: string) => {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  });
+};
+
+const getTodayDate = () => {
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const yyyy = today.getFullYear();
+  return `${dd}/${mm}/${yyyy}`;
+};
+
+const getTomorrowDate = () => {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const dd = String(tomorrow.getDate()).padStart(2, '0');
+  const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+  const yyyy = tomorrow.getFullYear();
+  return `${dd}/${mm}/${yyyy}`;
+};
 
 export default function BookingScreen() {
   const { user } = useAuth();
   const { addBooking } = useBooking();
   const params = useLocalSearchParams();
-  
+
   const [checkInDate, setCheckInDate] = useState('');
   const [checkOutDate, setCheckOutDate] = useState('');
   const [guests, setGuests] = useState('1');
-  const [isLoading, setIsLoading] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [completedBookingId, setCompletedBookingId] = useState('');
 
-  const roomPrice = parseFloat(params.price as string || '0');
-  
-  const calculateTotal = () => {
-    if (!checkInDate || !checkOutDate) return 0;
-    
-    const start = new Date(checkInDate);
-    const end = new Date(checkOutDate);
-    const diffTime = Math.abs(end.getTime() - start.getTime());
-    const nights = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
-    return nights * roomPrice;
-  };
+  const roomPrice = parseFloat((params.price as string) || '0');
 
   const calculateNights = () => {
     if (!checkInDate || !checkOutDate) return 0;
-    
-    const start = new Date(checkInDate);
-    const end = new Date(checkOutDate);
+    const start = new Date(parseFormattedDate(checkInDate));
+    const end = new Date(parseFormattedDate(checkOutDate));
     const diffTime = Math.abs(end.getTime() - start.getTime());
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   };
 
-  const handleBooking = async () => {
+  const calculateTotal = () => calculateNights() * roomPrice;
+
+  const calculateTaxesAndFees = () => {
+    const subtotal = calculateTotal();
+    const taxes = Math.round(subtotal * 0.12);
+    const fees = 25;
+    return { taxes, fees, total: subtotal + taxes + fees };
+  };
+
+  const handleProceedToCheckout = () => {
     if (!user) {
-      Alert.alert(
-        'Login Required', 
-        'Please log in to make a booking',
-        [
-          { text: 'Cancel', style: 'cancel' },
-          { text: 'Login', onPress: () => router.push('/(auth)/login') }
-        ]
-      );
+      Alert.alert('Login Required', 'Please log in to make a booking', [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Login', onPress: () => router.push('/(auth)/login') },
+      ]);
       return;
     }
 
@@ -56,74 +104,72 @@ export default function BookingScreen() {
       return;
     }
 
-    if (new Date(checkInDate) >= new Date(checkOutDate)) {
+    if (new Date(parseFormattedDate(checkInDate)) >= new Date(parseFormattedDate(checkOutDate))) {
       Alert.alert('Error', 'Check-out date must be after check-in date');
       return;
     }
 
-    if (new Date(checkInDate) < new Date()) {
-      Alert.alert('Error', 'Check-in date cannot be in the past');
+    setShowCheckout(true);
+  };
+
+  const handlePayment = async (paymentData: PaymentData) => {
+    setIsProcessing(true);
+
+    if (!user) {
+      Alert.alert('Login Required', 'Please log in to make a booking', [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Login', onPress: () => router.push('/(auth)/login') },
+      ]);
+      setIsProcessing(false);
       return;
     }
 
-    setIsLoading(true);
+    if (new Date(parseFormattedDate(checkInDate)) < new Date()) {
+      Alert.alert('Error', 'Check-in date cannot be in the past');
+      setIsProcessing(false);
+      return;
+    }
 
     try {
+      const { total } = calculateTaxesAndFees();
       const newBooking = {
+        id: Date.now().toString(),
         userId: user.id,
         hotelId: params.hotelId as string,
         roomId: params.roomId as string,
         hotelName: params.hotelName as string,
         roomType: params.roomType as string,
-        checkIn: checkInDate,
-        checkOut: checkOutDate,
+        checkIn: parseFormattedDate(checkInDate),
+        checkOut: parseFormattedDate(checkOutDate),
         guests: parseInt(guests),
-        totalPrice: calculateTotal(),
+        totalPrice: total,
         status: 'pending' as const,
+        createdAt: new Date().toISOString().split('T')[0],
         userName: user.name,
         userEmail: user.email,
       };
 
       addBooking(newBooking);
+      setCompletedBookingId(newBooking.id);
 
-      Alert.alert(
-        'Booking Successful!',
-        'Your booking has been submitted and is pending confirmation.',
-        [
-          {
-            text: 'OK',
-            onPress: () => router.push('/(tabs)/bookings')
-          }
-        ]
-      );
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      setShowCheckout(false);
+      setShowSuccess(true);
     } catch (error) {
       Alert.alert('Error', 'Failed to create booking. Please try again.');
+      setShowCheckout(false);
     } finally {
-      setIsLoading(false);
+      setIsProcessing(false);
     }
   };
 
-  const formatDate = (dateString: string) => {
-    if (!dateString) return '';
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      weekday: 'short',
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
+  const handleSuccessContinue = () => {
+    setShowSuccess(false);
+    router.push('/(tabs)/bookings');
   };
 
-  const getTodayDate = () => {
-    const today = new Date();
-    return today.toISOString().split('T')[0];
-  };
-
-  const getTomorrowDate = () => {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    return tomorrow.toISOString().split('T')[0];
-  };
+  const { taxes, fees, total } = calculateTaxesAndFees();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -145,45 +191,44 @@ export default function BookingScreen() {
 
         <View style={styles.formSection}>
           <Text style={styles.sectionTitle}>Booking Details</Text>
-          
+
+          {/* Check-in */}
           <View style={styles.inputGroup}>
             <Text style={styles.inputLabel}>Check-in Date *</Text>
             <View style={styles.inputContainer}>
               <Calendar size={20} color="#6B7280" />
               <TextInput
                 style={styles.textInput}
-                placeholder="YYYY-MM-DD"
+                placeholder="DD/MM/YYYY"
                 value={checkInDate}
-                onChangeText={setCheckInDate}
+                onChangeText={(text) => setCheckInDate(formatInputDate(text))}
+                keyboardType="numeric"
               />
             </View>
-            <TouchableOpacity 
-              style={styles.dateHelper}
-              onPress={() => setCheckInDate(getTodayDate())}
-            >
-              <Text style={styles.dateHelperText}>Use today ({formatDate(getTodayDate())})</Text>
+            <TouchableOpacity style={styles.dateHelper} onPress={() => setCheckInDate(getTodayDate())}>
+              <Text style={styles.dateHelperText}>Use today ({formatDisplayDate(new Date().toISOString())})</Text>
             </TouchableOpacity>
           </View>
 
+          {/* Check-out */}
           <View style={styles.inputGroup}>
             <Text style={styles.inputLabel}>Check-out Date *</Text>
             <View style={styles.inputContainer}>
               <Calendar size={20} color="#6B7280" />
               <TextInput
                 style={styles.textInput}
-                placeholder="YYYY-MM-DD"
+                placeholder="DD/MM/YYYY"
                 value={checkOutDate}
-                onChangeText={setCheckOutDate}
+                onChangeText={(text) => setCheckOutDate(formatInputDate(text))}
+                keyboardType="numeric"
               />
             </View>
-            <TouchableOpacity 
-              style={styles.dateHelper}
-              onPress={() => setCheckOutDate(getTomorrowDate())}
-            >
-              <Text style={styles.dateHelperText}>Use tomorrow ({formatDate(getTomorrowDate())})</Text>
+            <TouchableOpacity style={styles.dateHelper} onPress={() => setCheckOutDate(getTomorrowDate())}>
+              <Text style={styles.dateHelperText}>Use tomorrow ({formatDisplayDate(new Date(Date.now() + 86400000).toISOString())})</Text>
             </TouchableOpacity>
           </View>
 
+          {/* Guests */}
           <View style={styles.inputGroup}>
             <Text style={styles.inputLabel}>Number of Guests *</Text>
             <View style={styles.inputContainer}>
@@ -202,79 +247,65 @@ export default function BookingScreen() {
 
         {checkInDate && checkOutDate && (
           <View style={styles.summarySection}>
-            <Text style={styles.sectionTitle}>Booking Summary</Text>
-            
-            <View style={styles.summaryCard}>
-              <View style={styles.summaryRow}>
-                <Text style={styles.summaryLabel}>Check-in</Text>
-                <Text style={styles.summaryValue}>{formatDate(checkInDate)}</Text>
-              </View>
-              
-              <View style={styles.summaryRow}>
-                <Text style={styles.summaryLabel}>Check-out</Text>
-                <Text style={styles.summaryValue}>{formatDate(checkOutDate)}</Text>
-              </View>
-              
-              <View style={styles.summaryRow}>
-                <Text style={styles.summaryLabel}>Nights</Text>
-                <Text style={styles.summaryValue}>{calculateNights()}</Text>
-              </View>
-              
-              <View style={styles.summaryRow}>
-                <Text style={styles.summaryLabel}>Guests</Text>
-                <Text style={styles.summaryValue}>{guests}</Text>
-              </View>
-              
-              <View style={styles.summaryDivider} />
-              
-              <View style={styles.summaryRow}>
-                <Text style={styles.summaryLabel}>Room rate</Text>
-                <Text style={styles.summaryValue}>${roomPrice} × {calculateNights()} nights</Text>
-              </View>
-              
-              <View style={styles.summaryRow}>
-                <Text style={styles.totalLabel}>Total</Text>
-                <Text style={styles.totalValue}>${calculateTotal()}</Text>
-              </View>
-            </View>
+            <OrderSummary
+              hotelName={params.hotelName as string}
+              roomType={params.roomType as string}
+              checkIn={checkInDate}
+              checkOut={checkOutDate}
+              guests={parseInt(guests)}
+              pricePerNight={roomPrice}
+              nights={calculateNights()}
+              taxes={taxes}
+              fees={fees}
+              total={total}
+            />
           </View>
         )}
 
-        <View style={styles.paymentSection}>
-          <Text style={styles.sectionTitle}>Payment Information</Text>
-          
-          <View style={styles.paymentCard}>
-            <View style={styles.paymentHeader}>
-              <CreditCard size={20} color="#6B7280" />
-              <Text style={styles.paymentTitle}>Mock Payment</Text>
-            </View>
-            <Text style={styles.paymentDescription}>
-              This is a demo app. No actual payment will be processed.
-            </Text>
-          </View>
-        </View>
-
         <TouchableOpacity
-          style={[styles.bookButton, isLoading && styles.bookButtonDisabled]}
-          onPress={handleBooking}
-          disabled={isLoading}
+          style={[styles.checkoutButton, (!checkInDate || !checkOutDate) && styles.checkoutButtonDisabled]}
+          onPress={handleProceedToCheckout}
+          disabled={!checkInDate || !checkOutDate}
         >
-          {isLoading ? (
-            <Text style={styles.bookButtonText}>Processing...</Text>
-          ) : (
-            <>
-              <CheckCircle size={20} color="#FFFFFF" />
-              <Text style={styles.bookButtonText}>
-                Confirm Booking • ${calculateTotal()}
-              </Text>
-            </>
-          )}
+          <CreditCard size={20} color="#FFFFFF" />
+          <Text style={styles.checkoutButtonText}>Proceed to Checkout • ${total}</Text>
         </TouchableOpacity>
       </ScrollView>
+
+      {/* Checkout Modal */}
+      <Modal visible={showCheckout} animationType="slide" presentationStyle="pageSheet">
+        <SafeAreaView style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <TouchableOpacity onPress={() => setShowCheckout(false)} style={styles.closeButton}>
+              <X size={24} color="#6B7280" />
+            </TouchableOpacity>
+            <Text style={styles.modalTitle}>Secure Checkout</Text>
+            <View style={styles.placeholder} />
+          </View>
+
+          <ScrollView style={styles.modalContent} showsVerticalScrollIndicator={false}>
+            <CheckoutForm totalAmount={total} onSubmit={handlePayment} isLoading={isProcessing} />
+          </ScrollView>
+        </SafeAreaView>
+      </Modal>
+
+      {/* Success Modal */}
+      <Modal visible={showSuccess} animationType="slide" presentationStyle="pageSheet">
+        <SafeAreaView style={styles.modalContainer}>
+          <PaymentSuccess
+            bookingId={completedBookingId}
+            hotelName={params.hotelName as string}
+            roomType={params.roomType as string}
+            checkIn={checkInDate}
+            checkOut={checkOutDate}
+            totalAmount={total}
+            onContinue={handleSuccessContinue}
+          />
+        </SafeAreaView>
+      </Modal>
     </SafeAreaView>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -388,84 +419,9 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   summarySection: {
-    marginBottom: 16,
-  },
-  summaryCard: {
-    backgroundColor: '#FFFFFF',
-    padding: 20,
-    borderRadius: 16,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  summaryRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  summaryLabel: {
-    fontSize: 14,
-    color: '#6B7280',
-  },
-  summaryValue: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#111827',
-  },
-  summaryDivider: {
-    height: 1,
-    backgroundColor: '#E5E7EB',
-    marginVertical: 8,
-  },
-  totalLabel: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#111827',
-  },
-  totalValue: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#2563EB',
-  },
-  paymentSection: {
     marginBottom: 24,
   },
-  paymentCard: {
-    backgroundColor: '#FFFFFF',
-    padding: 20,
-    borderRadius: 16,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  paymentHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  paymentTitle: {
-    marginLeft: 12,
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#111827',
-  },
-  paymentDescription: {
-    fontSize: 14,
-    color: '#6B7280',
-    lineHeight: 20,
-  },
-  bookButton: {
+  checkoutButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -474,13 +430,43 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginBottom: 32,
   },
-  bookButtonDisabled: {
+  checkoutButtonDisabled: {
     backgroundColor: '#9CA3AF',
   },
-  bookButtonText: {
+  checkoutButtonText: {
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold',
     marginLeft: 8,
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: '#F9FAFB',
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#FFFFFF',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E5E7EB',
+  },
+  closeButton: {
+    padding: 4,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#111827',
+  },
+  placeholder: {
+    width: 32,
+  },
+  modalContent: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
 });

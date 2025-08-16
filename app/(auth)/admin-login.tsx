@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { router } from 'expo-router';
-import { Shield, Lock, Eye, EyeOff, ArrowLeft, Mail } from 'lucide-react-native';
+import { Stack, router } from 'expo-router';
+import { Shield, Lock, Eye, EyeOff, Mail } from 'lucide-react-native';
 import { useAuth } from '@/contexts/AuthContext';
 
 export default function AdminLoginScreen() {
@@ -18,14 +18,13 @@ export default function AdminLoginScreen() {
       return;
     }
 
-    // Hardcoded admin credentials
     if (email !== 'admin@hotel.com' || password !== 'admin123') {
       Alert.alert('Error', 'Invalid admin credentials');
       return;
     }
 
     setIsLoading(true);
-    
+
     try {
       const success = await login(email, password);
       if (success) {
@@ -33,7 +32,7 @@ export default function AdminLoginScreen() {
       } else {
         Alert.alert('Error', 'Admin login failed');
       }
-    } catch (error) {
+    } catch {
       Alert.alert('Error', 'Login failed. Please try again.');
     } finally {
       setIsLoading(false);
@@ -46,116 +45,119 @@ export default function AdminLoginScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView 
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardView}
-      >
-        <View style={styles.content}>
-          <View style={styles.header}>
-            <TouchableOpacity 
-              style={styles.backButton}
-              onPress={() => router.back()}
-            >
-              <ArrowLeft size={24} color="#DC2626" />
-            </TouchableOpacity>
-            
-            <View style={styles.headerContent}>
-              <View style={styles.adminIcon}>
-                <Shield size={32} color="#DC2626" />
-              </View>
-              <Text style={styles.title}>Admin Access</Text>
-              <Text style={styles.subtitle}>Secure login for administrators</Text>
-            </View>
-          </View>
+    <>
+      {/* Hide the default header to remove the back button */}
+      <Stack.Screen options={{ headerShown: false }} />
 
-          <View style={styles.credentialsCard}>
-            <Text style={styles.credentialsTitle}>Demo Admin Credentials</Text>
-            <View style={styles.credentialItem}>
-              <Text style={styles.credentialLabel}>Email:</Text>
-              <Text style={styles.credentialValue}>admin@hotel.com</Text>
-            </View>
-            <View style={styles.credentialItem}>
-              <Text style={styles.credentialLabel}>Password:</Text>
-              <Text style={styles.credentialValue}>admin123</Text>
-            </View>
-            <TouchableOpacity 
-              style={styles.fillButton}
-              onPress={fillAdminCredentials}
-            >
-              <Text style={styles.fillButtonText}>Auto-fill credentials</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.form}>
-            <View style={styles.inputGroup}>
-              <Text style={styles.inputLabel}>Admin Email</Text>
-              <View style={styles.inputContainer}>
-                <Mail size={20} color="#6B7280" />
-                <TextInput
-                  style={styles.textInput}
-                  placeholder="Enter admin email"
-                  value={email}
-                  onChangeText={setEmail}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                />
+      <SafeAreaView style={styles.container}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.keyboardView}
+        >
+          <View style={styles.content}>
+            {/* Header without back button */}
+            <View style={styles.header}>
+              <View style={styles.headerContent}>
+                <View style={styles.adminIcon}>
+                  <Shield size={32} color="#DC2626" />
+                </View>
+                <Text style={styles.title}>Admin Access</Text>
+                <Text style={styles.subtitle}>Secure login for administrators</Text>
               </View>
             </View>
 
-            <View style={styles.inputGroup}>
-              <Text style={styles.inputLabel}>Admin Password</Text>
-              <View style={styles.inputContainer}>
-                <Lock size={20} color="#6B7280" />
-                <TextInput
-                  style={styles.textInput}
-                  placeholder="Enter admin password"
-                  value={password}
-                  onChangeText={setPassword}
-                  secureTextEntry={!showPassword}
-                  autoCapitalize="none"
-                />
-                <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                  {showPassword ? (
-                    <EyeOff size={20} color="#6B7280" />
-                  ) : (
-                    <Eye size={20} color="#6B7280" />
-                  )}
-                </TouchableOpacity>
+            {/* Demo credentials card */}
+            <View style={styles.credentialsCard}>
+              <Text style={styles.credentialsTitle}>Demo Admin Credentials</Text>
+              <View style={styles.credentialItem}>
+                <Text style={styles.credentialLabel}>Email:</Text>
+                <Text style={styles.credentialValue}>admin@hotel.com</Text>
               </View>
+              <View style={styles.credentialItem}>
+                <Text style={styles.credentialLabel}>Password:</Text>
+                <Text style={styles.credentialValue}>admin123</Text>
+              </View>
+              <TouchableOpacity
+                style={styles.fillButton}
+                onPress={fillAdminCredentials}
+              >
+                <Text style={styles.fillButtonText}>Auto-fill credentials</Text>
+              </TouchableOpacity>
             </View>
 
-            <TouchableOpacity
-              style={[styles.loginButton, isLoading && styles.loginButtonDisabled]}
-              onPress={handleAdminLogin}
-              disabled={isLoading}
-            >
-              <Shield size={20} color="#FFFFFF" />
-              <Text style={styles.loginButtonText}>
-                {isLoading ? 'Authenticating...' : 'Admin Sign In'}
+            {/* Login form */}
+            <View style={styles.form}>
+              <View style={styles.inputGroup}>
+                <Text style={styles.inputLabel}>Admin Email</Text>
+                <View style={styles.inputContainer}>
+                  <Mail size={20} color="#6B7280" />
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="Enter admin email"
+                    value={email}
+                    onChangeText={setEmail}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                  />
+                </View>
+              </View>
+
+              <View style={styles.inputGroup}>
+                <Text style={styles.inputLabel}>Admin Password</Text>
+                <View style={styles.inputContainer}>
+                  <Lock size={20} color="#6B7280" />
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="Enter admin password"
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry={!showPassword}
+                    autoCapitalize="none"
+                  />
+                  <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                    {showPassword ? (
+                      <EyeOff size={20} color="#6B7280" />
+                    ) : (
+                      <Eye size={20} color="#6B7280" />
+                    )}
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              <TouchableOpacity
+                style={[styles.loginButton, isLoading && styles.loginButtonDisabled]}
+                onPress={handleAdminLogin}
+                disabled={isLoading}
+              >
+                <Shield size={20} color="#FFFFFF" />
+                <Text style={styles.loginButtonText}>
+                  {isLoading ? 'Authenticating...' : 'Admin Sign In'}
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* Security notice */}
+            <View style={styles.securityNotice}>
+              <View style={styles.noticeIcon}>
+                <Shield size={16} color="#DC2626" />
+              </View>
+              <Text style={styles.noticeText}>
+                This is a secure admin area. Only authorized personnel should access this login.
               </Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.securityNotice}>
-            <View style={styles.noticeIcon}>
-              <Shield size={16} color="#DC2626" />
             </View>
-            <Text style={styles.noticeText}>
-              This is a secure admin area. Only authorized personnel should access this login.
-            </Text>
-          </View>
 
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>Need user access? </Text>
-            <TouchableOpacity onPress={() => router.push('/(auth)/login')}>
-              <Text style={styles.footerLink}>User Login</Text>
-            </TouchableOpacity>
+            {/* Footer */}
+            <View style={styles.footer}>
+              <Text style={styles.footerText}>Need user access? </Text>
+              <TouchableOpacity onPress={() => router.push('/(auth)/login')}>
+                <Text style={styles.footerLink}>User Login</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </>
   );
 }
 

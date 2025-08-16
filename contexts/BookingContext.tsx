@@ -15,14 +15,15 @@ const BookingContext = createContext<BookingContextType | undefined>(undefined);
 export function BookingProvider({ children }: { children: ReactNode }) {
   const [bookings, setBookings] = useState<Booking[]>(mockBookings);
 
-  const addBooking = (bookingData: Omit<Booking, 'id' | 'createdAt'>) => {
-    const newBooking: Booking = {
-      ...bookingData,
-      id: Date.now().toString(),
-      createdAt: new Date().toISOString().split('T')[0],
-    };
-    setBookings(prev => [...prev, newBooking]);
+const addBooking = (bookingData: Omit<Booking, 'id' | 'createdAt'>) => {
+  const newBooking: Booking = {
+    ...bookingData,
+    id: Date.now().toString(), // or uuid()
+    createdAt: new Date().toISOString(),
   };
+  setBookings(prev => [...prev, newBooking]);
+};
+
 
   const updateBookingStatus = (bookingId: string, status: Booking['status']) => {
     setBookings(prev => 
