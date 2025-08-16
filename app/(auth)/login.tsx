@@ -18,6 +18,11 @@ export default function LoginScreen() {
       return;
     }
 
+    // Prevent admin login through user login page
+    if (email === 'admin@hotel.com') {
+      Alert.alert('Error', 'Admin accounts must use the Admin Login page');
+      return;
+    }
     setIsLoading(true);
     
     try {
@@ -34,14 +39,9 @@ export default function LoginScreen() {
     }
   };
 
-  const handleDemoLogin = (userType: 'user' | 'admin') => {
-    if (userType === 'user') {
-      setEmail('john.doe@example.com');
-      setPassword('password123');
-    } else {
-      setEmail('admin@hotel.com');
-      setPassword('admin123');
-    }
+  const handleDemoLogin = () => {
+    setEmail('john.doe@example.com');
+    setPassword('password123');
   };
 
   return (
@@ -113,23 +113,13 @@ export default function LoginScreen() {
 
             <View style={styles.demoSection}>
               <Text style={styles.demoTitle}>Demo Accounts</Text>
-              <View style={styles.demoButtons}>
-                <TouchableOpacity
-                  style={styles.demoButton}
-                  onPress={() => handleDemoLogin('user')}
-                >
-                  <User size={16} color="#2563EB" />
-                  <Text style={styles.demoButtonText}>Demo User</Text>
-                </TouchableOpacity>
-                
-                <TouchableOpacity
-                  style={styles.demoButton}
-                  onPress={() => handleDemoLogin('admin')}
-                >
-                  <Shield size={16} color="#DC2626" />
-                  <Text style={styles.demoButtonText}>Demo Admin</Text>
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity
+                style={styles.demoButton}
+                onPress={handleDemoLogin}
+              >
+                <User size={16} color="#2563EB" />
+                <Text style={styles.demoButtonText}>Demo User</Text>
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -140,13 +130,16 @@ export default function LoginScreen() {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity 
-            style={styles.adminLink}
-            onPress={() => router.push('/(auth)/admin-login')}
-          >
-            <Shield size={16} color="#6B7280" />
-            <Text style={styles.adminLinkText}>Admin Login</Text>
-          </TouchableOpacity>
+          <View style={styles.adminSection}>
+            <Text style={styles.adminSectionText}>Administrator?</Text>
+            <TouchableOpacity 
+              style={styles.adminButton}
+              onPress={() => router.push('/(auth)/admin-login')}
+            >
+              <Shield size={16} color="#FFFFFF" />
+              <Text style={styles.adminButtonText}>Admin Login</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -281,16 +274,30 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#2563EB',
   },
-  adminLink: {
-    flexDirection: 'row',
+  adminSection: {
     alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-    paddingVertical: 12,
+    marginTop: 24,
+    paddingTop: 24,
+    borderTopWidth: 1,
+    borderTopColor: '#E5E7EB',
   },
-  adminLinkText: {
-    marginLeft: 8,
+  adminSectionText: {
     fontSize: 14,
     color: '#6B7280',
+    marginBottom: 12,
+  },
+  adminButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#DC2626',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 8,
+  },
+  adminButtonText: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: '600',
+    marginLeft: 8,
   },
 });

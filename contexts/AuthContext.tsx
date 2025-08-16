@@ -8,8 +8,6 @@ interface AuthContextType {
   isAdmin: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
-  switchToAdmin: () => void;
-  switchToUser: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -50,9 +48,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         user, 
         isAdmin, 
         login, 
-        logout, 
-        switchToAdmin, 
-        switchToUser 
+        logout
       }}
     >
       {children}

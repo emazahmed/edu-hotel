@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
-import { User, Mail, Phone, Settings, Shield, LogOut, UserCheck } from 'lucide-react-native';
+import { User, Mail, Phone, Settings, Shield, LogOut } from 'lucide-react-native';
 import { useAuth } from '@/contexts/AuthContext';
 
 export default function ProfileScreen() {
-  const { user, logout, switchToAdmin, switchToUser, isAdmin } = useAuth();
+  const { user, logout, isAdmin } = useAuth();
 
   const handleLogout = () => {
     Alert.alert(
@@ -23,14 +23,6 @@ export default function ProfileScreen() {
         },
       ]
     );
-  };
-
-  const handleSwitchRole = () => {
-    if (isAdmin) {
-      switchToUser();
-    } else {
-      switchToAdmin();
-    }
   };
 
   const handleAdminPanel = () => {
@@ -105,20 +97,6 @@ export default function ProfileScreen() {
           <Text style={styles.sectionTitle}>Actions</Text>
           
           <View style={styles.actionCard}>
-            <TouchableOpacity style={styles.actionItem} onPress={handleSwitchRole}>
-              <View style={styles.actionIcon}>
-                <UserCheck size={20} color="#2563EB" />
-              </View>
-              <View style={styles.actionContent}>
-                <Text style={styles.actionLabel}>
-                  Switch to {isAdmin ? 'User' : 'Admin'}
-                </Text>
-                <Text style={styles.actionDescription}>
-                  {isAdmin ? 'View as regular user' : 'Access admin features'}
-                </Text>
-              </View>
-            </TouchableOpacity>
-            
             {isAdmin && (
               <TouchableOpacity style={styles.actionItem} onPress={handleAdminPanel}>
                 <View style={styles.actionIcon}>

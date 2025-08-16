@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
-import { ArrowLeft, Calendar, Users, MapPin, Phone, Mail, CircleCheck as CheckCircle, Circle as XCircle, Clock } from 'lucide-react-native';
+import { ArrowLeft, Calendar, Users, MapPin, Phone, Mail, CircleCheck as CheckCircle, Circle as XCircle, Clock, LogOut } from 'lucide-react-native';
 import { useAuth } from '@/contexts/AuthContext';
 import { useBooking } from '@/contexts/BookingContext';
 
 export default function AdminPanel() {
-  const { user, isAdmin } = useAuth();
+  const { user, isAdmin, logout } = useAuth();
   const { getAllBookings, updateBookingStatus } = useBooking();
   const [selectedFilter, setSelectedFilter] = useState('all');
   
@@ -28,6 +28,23 @@ export default function AdminPanel() {
           text: 'Confirm', 
           onPress: () => updateBookingStatus(bookingId, newStatus),
           style: newStatus === 'cancelled' ? 'destructive' : 'default'
+        },
+      ]
+    );
+  };
+
+  const handleLogout = () => {
+    Alert.alert(
+      'Logout',
+      'Are you sure you want to logout?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { 
+          text: 'Logout', 
+          onPress: () => {
+            logout();
+          }, 
+          style: 'destructive' 
         },
       ]
     );
@@ -119,6 +136,9 @@ export default function AdminPanel() {
             Welcome, {user?.name}
           </Text>
         </View>
+        <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
+          <LogOut size={20} color="#DC2626" />
+        </TouchableOpacity>
       </View>
 
       <View style={styles.statsContainer}>
@@ -298,6 +318,9 @@ const styles = StyleSheet.create({
   headerSubtitle: {
     fontSize: 14,
     color: '#6B7280',
+  },
+  logoutButton: {
+    padding: 8,
   },
   statsContainer: {
     backgroundColor: '#FFFFFF',
