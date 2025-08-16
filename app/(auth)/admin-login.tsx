@@ -18,19 +18,14 @@ export default function LoginScreen() {
       return;
     }
 
-    // Prevent admin login through user login page
-    if (email === 'admin@hotel.com') {
-      Alert.alert('Error', 'Admin accounts must use the Admin Login page');
-      return;
-    }
     setIsLoading(true);
-    
+
     try {
       const success = await login(email, password);
       if (success) {
-        router.replace('/(tabs)');
+        router.replace('/admin');
       } else {
-        Alert.alert('Error', 'Invalid email or password');
+        Alert.alert('Error', 'Invalid admin credentials');
       }
     } catch (error) {
       Alert.alert('Error', 'Login failed. Please try again.');
@@ -40,20 +35,23 @@ export default function LoginScreen() {
   };
 
   const handleDemoLogin = () => {
-    setEmail('john.doe@example.com');
-    setPassword('password123');
+    setEmail('admin@hotel.com');
+    setPassword('admin123');
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView 
+      <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.keyboardView}
       >
         <View style={styles.content}>
           <View style={styles.header}>
-            <Text style={styles.title}>Welcome Back</Text>
-            <Text style={styles.subtitle}>Sign in to your account</Text>
+            <View style={styles.adminIconLarge}>
+              <Shield size={32} color="#FFFFFF" />
+            </View>
+            <Text style={styles.title}>Admin Login</Text>
+            <Text style={styles.subtitle}>Administrator access only</Text>
           </View>
 
           <View style={styles.form}>
@@ -112,32 +110,21 @@ export default function LoginScreen() {
             </View>
 
             <View style={styles.demoSection}>
-              <Text style={styles.demoTitle}>Demo Accounts</Text>
+              <Text style={styles.demoTitle}>Demo Admin Account</Text>
               <TouchableOpacity
                 style={styles.demoButton}
                 onPress={handleDemoLogin}
               >
-                <User size={16} color="#2563EB" />
-                <Text style={styles.demoButtonText}>Demo User</Text>
+                <Shield size={16} color="#DC2626" />
+                <Text style={styles.demoButtonText}>Demo Admin</Text>
               </TouchableOpacity>
             </View>
           </View>
 
           <View style={styles.footer}>
-            <Text style={styles.footerText}>Don't have an account? </Text>
-            <TouchableOpacity onPress={() => router.push('/(auth)/signup')}>
-              <Text style={styles.footerLink}>Sign Up</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.adminSection}>
-            <Text style={styles.adminSectionText}>Administrator?</Text>
-            <TouchableOpacity 
-              style={styles.adminButton}
-              onPress={() => router.push('/(auth)/admin-login')}
-            >
-              <Shield size={16} color="#FFFFFF" />
-              <Text style={styles.adminButtonText}>Admin Login</Text>
+            <Text style={styles.footerText}>Regular user? </Text>
+            <TouchableOpacity onPress={() => router.push('/(auth)/login')}>
+              <Text style={styles.footerLink}>User Login</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -299,5 +286,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
     marginLeft: 8,
+  },
+  adminIconLarge: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: '#DC2626',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
   },
 });
