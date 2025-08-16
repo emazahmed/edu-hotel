@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
-import { ArrowLeft, Calendar, Users, MapPin, Phone, Mail, CircleCheck as CheckCircle, Circle as XCircle, Clock, LogOut } from 'lucide-react-native';
+import { Calendar, Users, MapPin, Phone, Mail, CircleCheck as CheckCircle, Circle as XCircle, Clock, LogOut, Shield } from 'lucide-react-native';
 import { useAuth } from '@/contexts/AuthContext';
 import { useBooking } from '@/contexts/BookingContext';
 
@@ -109,10 +109,8 @@ export default function AdminPanel() {
   if (!isAdmin) {
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-            <ArrowLeft size={24} color="#2563EB" />
-          </TouchableOpacity>
+        <View style={styles.deniedHeader}>
+          <Shield size={32} color="#DC2626" />
           <Text style={styles.headerTitle}>Access Denied</Text>
         </View>
         <View style={styles.emptyState}>
@@ -127,10 +125,10 @@ export default function AdminPanel() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-          <ArrowLeft size={24} color="#2563EB" />
-        </TouchableOpacity>
         <View style={styles.headerContent}>
+          <View style={styles.adminIcon}>
+            <Shield size={24} color="#DC2626" />
+          </View>
           <Text style={styles.headerTitle}>Admin Panel</Text>
           <Text style={styles.headerSubtitle}>
             Welcome, {user?.name}
@@ -300,20 +298,39 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
     paddingHorizontal: 20,
-    paddingVertical: 16,
+    paddingVertical: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#E5E7EB',
   },
-  backButton: {
-    marginRight: 16,
+  deniedHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFFFFF',
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E5E7EB',
   },
   headerContent: {
     flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  adminIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#FEF2F2',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
   },
   headerTitle: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#111827',
+    flex: 1,
   },
   headerSubtitle: {
     fontSize: 14,
