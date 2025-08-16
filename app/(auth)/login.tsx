@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     color: '#111827',
   },
   loginButton: {
-    backgroundColor: '#2563EB',
+    backgroundColor: '#00afb9',
     paddingVertical: 16,
     borderRadius: 12,
     alignItems: 'center',
@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
   footerLink: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#2563EB',
+    color: '#00afb9',
   },
   adminSection: {
     alignItems: 'center',
@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
   adminButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#DC2626',
+    backgroundColor: '#008891',
     paddingHorizontal: 20,
     paddingVertical: 12,
     borderRadius: 8,

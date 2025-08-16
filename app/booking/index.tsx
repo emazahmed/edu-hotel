@@ -414,8 +414,7 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   dateHelperText: {
-    fontSize: 12,
-    color: '#2563EB',
+    color: '#00afb9',
     fontWeight: '500',
   },
   summarySection: {
@@ -448,7 +447,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#FFFFFF',
-    paddingHorizontal: 20,
     paddingVertical: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#E5E7EB',
@@ -469,4 +467,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 20,
   },
+
 });

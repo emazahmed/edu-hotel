@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
     color: '#111827',
   },
   signupButton: {
-    backgroundColor: '#2563EB',
+    backgroundColor: '#00afb9',
     paddingVertical: 16,
     borderRadius: 12,
     alignItems: 'center',
@@ -389,6 +389,6 @@ const styles = StyleSheet.create({
   footerLink: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#2563EB',
+    color: '#00afb9',
   },
 });

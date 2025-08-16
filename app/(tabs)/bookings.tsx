@@ -1,4 +1,5 @@
 import React from 'react';
+import { router } from 'expo-router';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Calendar, MapPin, Users, Clock } from 'lucide-react-native';
@@ -286,7 +287,7 @@ const styles = StyleSheet.create({
   totalPrice: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#2563EB',
+    color: '#00afb9',
   },
   priceLabel: {
     fontSize: 12,
@@ -311,7 +312,7 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   loginButton: {
-    backgroundColor: '#2563EB',
+    backgroundColor: '#00afb9',
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 8,

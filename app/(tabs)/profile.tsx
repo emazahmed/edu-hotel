@@ -200,18 +200,18 @@ const styles = StyleSheet.create({
   adminBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FEF2F2',
+    backgroundColor: '#e6fffe',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#FECACA',
+    borderColor: '#80e5e8',
   },
   adminText: {
     marginLeft: 6,
     fontSize: 14,
     fontWeight: '600',
-    color: '#DC2626',
+    color: '#008891',
   },
   emptyState: {
     flex: 1,
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#F0F9FF',
+    backgroundColor: '#e6fffe',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,
@@ -353,7 +353,7 @@ const styles = StyleSheet.create({
   statNumber: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#2563EB',
+    color: '#00afb9',
     marginBottom: 4,
   },
   statLabel: {
@@ -362,7 +362,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   loginButton: {
-    backgroundColor: '#2563EB',
+    backgroundColor: '#00afb9',
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 8,

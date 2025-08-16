@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#FEF2F2',
+    backgroundColor: '#e6fffe',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
@@ -358,7 +358,7 @@ const styles = StyleSheet.create({
   statNumber: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#2563EB',
+    color: '#00afb9',
     marginBottom: 4,
   },
   statLabel: {
@@ -381,7 +381,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F3F4F6',
   },
   activeFilterButton: {
-    backgroundColor: '#2563EB',
+    backgroundColor: '#00afb9',
   },
   filterText: {
     fontSize: 14,
@@ -518,7 +518,7 @@ const styles = StyleSheet.create({
   totalPrice: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#2563EB',
+    color: '#00afb9',
     marginBottom: 4,
   },
   bookingDate: {
@@ -532,7 +532,7 @@ const styles = StyleSheet.create({
   confirmButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#059669',
+    backgroundColor: '#00afb9',
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 8,

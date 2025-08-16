@@ -192,12 +192,12 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: '#FEF2F2',
+    backgroundColor: '#e6fffe',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 16,
     borderWidth: 2,
-    borderColor: '#FECACA',
+    borderColor: '#80e5e8',
   },
   title: {
     fontSize: 32,
@@ -211,9 +211,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   credentialsCard: {
-    backgroundColor: '#FFFBEB',
+    backgroundColor: '#e6fffe',
     borderWidth: 1,
-    borderColor: '#FDE68A',
+    borderColor: '#80e5e8',
     borderRadius: 12,
     padding: 16,
     marginBottom: 24,
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
   credentialsTitle: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#92400E',
+    color: '#006064',
     marginBottom: 12,
   },
   credentialItem: {
@@ -230,17 +230,17 @@ const styles = StyleSheet.create({
   },
   credentialLabel: {
     fontSize: 14,
-    color: '#92400E',
+    color: '#006064',
     fontWeight: '500',
     width: 80,
   },
   credentialValue: {
     fontSize: 14,
-    color: '#92400E',
+    color: '#006064',
     fontFamily: 'monospace',
   },
   fillButton: {
-    backgroundColor: '#F59E0B',
+    backgroundColor: '#00afb9',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 6,
@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#DC2626',
+    backgroundColor: '#008891',
     paddingVertical: 16,
     borderRadius: 12,
     marginTop: 8,
@@ -300,9 +300,9 @@ const styles = StyleSheet.create({
   },
   securityNotice: {
     flexDirection: 'row',
-    backgroundColor: '#FEF2F2',
+    backgroundColor: '#e6fffe',
     borderWidth: 1,
-    borderColor: '#FECACA',
+    borderColor: '#80e5e8',
     borderRadius: 12,
     padding: 16,
     marginBottom: 24,
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
   noticeText: {
     flex: 1,
     fontSize: 14,
-    color: '#991B1B',
+    color: '#006064',
     lineHeight: 20,
   },
   footer: {
@@ -330,7 +330,7 @@ const styles = StyleSheet.create({
   footerLink: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#2563EB',
+    color: '#00afb9',
   },
   demoSection: {
     alignItems: 'center',

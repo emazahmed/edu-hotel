@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
   totalValue: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#2563EB',
+    color: '#00afb9',
   },
   policies: {
     backgroundColor: '#F9FAFB',

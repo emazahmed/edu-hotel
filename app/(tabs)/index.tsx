@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   backButtonText: {
-    color: '#2563EB',
+    color: '#00afb9',
     fontSize: 16,
     fontWeight: '500',
   },
@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FEF3C7',
+    backgroundColor: '#e6fffe',
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 8,
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     fontSize: 14,
     fontWeight: '600',
-    color: '#92400E',
+    color: '#006064',
   },
   locationContainer: {
     flexDirection: 'row',
@@ -311,11 +311,11 @@ const styles = StyleSheet.create({
   priceText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#2563EB',
+    color: '#00afb9',
   },
   viewRoomsText: {
     fontSize: 14,
-    color: '#2563EB',
+    color: '#00afb9',
     fontWeight: '500',
   },
   hotelImage: {
@@ -367,7 +367,7 @@ const styles = StyleSheet.create({
   amenityItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F0F9FF',
+    backgroundColor: '#e6fffe',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 20,
@@ -375,7 +375,7 @@ const styles = StyleSheet.create({
   amenityText: {
     marginLeft: 6,
     fontSize: 14,
-    color: '#0369A1',
+    color: '#006064',
     fontWeight: '500',
   },
   roomsSection: {
@@ -445,14 +445,14 @@ const styles = StyleSheet.create({
   roomPrice: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#2563EB',
+    color: '#00afb9',
   },
   roomPriceLabel: {
     fontSize: 14,
     color: '#6B7280',
   },
   bookButton: {
-    backgroundColor: '#2563EB',
+    backgroundColor: '#00afb9',
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 8,
