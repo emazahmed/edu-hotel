@@ -291,16 +291,16 @@ export default function AdminPanel() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#111827',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     paddingHorizontal: 20,
     paddingVertical: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: '#374151',
   },
   deniedHeader: {
     flexDirection: 'row',
@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#e6fffe',
+    backgroundColor: '#1E40AF',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
@@ -329,18 +329,18 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     flex: 1,
   },
   headerSubtitle: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#D1D5DB',
   },
   logoutButton: {
     padding: 8,
   },
   statsContainer: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     paddingHorizontal: 20,
     paddingVertical: 16,
   },
@@ -351,45 +351,45 @@ const styles = StyleSheet.create({
   statCard: {
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#374151',
     borderRadius: 12,
     minWidth: 80,
   },
   statNumber: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#00afb9',
+    color: '#60A5FA',
     marginBottom: 4,
   },
   statLabel: {
     fontSize: 12,
-    color: '#6B7280',
+    color: '#D1D5DB',
     fontWeight: '500',
   },
   filtersContainer: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: '#374151',
   },
   filterButton: {
     paddingHorizontal: 16,
     paddingVertical: 8,
     marginRight: 12,
     borderRadius: 20,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#374151',
   },
   activeFilterButton: {
-    backgroundColor: '#00afb9',
+    backgroundColor: '#3B82F6',
   },
   filterText: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#6B7280',
+    color: '#D1D5DB',
   },
   activeFilterText: {
-    color: '#FFFFFF',
+    color: '#F9FAFB',
   },
   content: {
     flex: 1,
@@ -398,7 +398,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     marginVertical: 16,
   },
   emptyState: {
@@ -410,18 +410,18 @@ const styles = StyleSheet.create({
   emptyStateTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#374151',
+    color: '#F9FAFB',
     marginTop: 16,
     marginBottom: 8,
   },
   emptyStateText: {
     fontSize: 16,
-    color: '#6B7280',
+    color: '#D1D5DB',
     textAlign: 'center',
     lineHeight: 24,
   },
   bookingCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     borderRadius: 16,
     padding: 20,
     marginBottom: 16,
@@ -446,12 +446,12 @@ const styles = StyleSheet.create({
   hotelName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     marginBottom: 4,
   },
   roomType: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#D1D5DB',
   },
   statusBadge: {
     flexDirection: 'row',
@@ -466,7 +466,7 @@ const styles = StyleSheet.create({
     marginLeft: 6,
   },
   customerInfo: {
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#374151',
     padding: 12,
     borderRadius: 12,
     marginBottom: 16,
@@ -477,7 +477,7 @@ const styles = StyleSheet.create({
   customerName: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#111827',
+    color: '#F9FAFB',
   },
   contactInfo: {
     gap: 6,
@@ -489,7 +489,7 @@ const styles = StyleSheet.create({
   contactText: {
     marginLeft: 8,
     fontSize: 14,
-    color: '#6B7280',
+    color: '#D1D5DB',
   },
   bookingDetails: {
     marginBottom: 16,
@@ -502,7 +502,7 @@ const styles = StyleSheet.create({
   detailText: {
     marginLeft: 8,
     fontSize: 14,
-    color: '#374151',
+    color: '#F9FAFB',
   },
   bookingFooter: {
     flexDirection: 'row',
@@ -510,7 +510,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     paddingTop: 16,
     borderTopWidth: 1,
-    borderTopColor: '#F3F4F6',
+    borderTopColor: '#374151',
   },
   priceSection: {
     flex: 1,
@@ -518,12 +518,12 @@ const styles = StyleSheet.create({
   totalPrice: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#00afb9',
+    color: '#60A5FA',
     marginBottom: 4,
   },
   bookingDate: {
     fontSize: 12,
-    color: '#9CA3AF',
+    color: '#6B7280',
   },
   actionButtons: {
     flexDirection: 'row',
@@ -532,7 +532,7 @@ const styles = StyleSheet.create({
   confirmButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#00afb9',
+    backgroundColor: '#10B981',
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 8,
@@ -546,15 +546,15 @@ const styles = StyleSheet.create({
   cancelButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FEF2F2',
+    backgroundColor: '#1F2937',
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#FECACA',
+    borderColor: '#EF4444',
   },
   cancelButtonText: {
-    color: '#DC2626',
+    color: '#EF4444',
     fontSize: 14,
     fontWeight: '500',
     marginLeft: 6,

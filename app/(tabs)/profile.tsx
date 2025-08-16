@@ -140,11 +140,6 @@ export default function ProfileScreen() {
               <Text style={styles.statNumber}>2</Text>
               <Text style={styles.statLabel}>Active Bookings</Text>
             </View>
-            
-            <View style={styles.statCard}>
-              <Text style={styles.statNumber}>5</Text>
-              <Text style={styles.statLabel}>Favorite Hotels</Text>
-            </View>
           </View>
         </View>
       </ScrollView>
@@ -155,19 +150,19 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#111827',
   },
   header: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     paddingHorizontal: 20,
     paddingVertical: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: '#374151',
   },
   headerTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
   },
   content: {
     flex: 1,
@@ -176,7 +171,7 @@ const styles = StyleSheet.create({
   profileHeader: {
     alignItems: 'center',
     paddingVertical: 32,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     marginHorizontal: -20,
     marginBottom: 24,
   },
@@ -189,29 +184,29 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     marginBottom: 4,
   },
   userEmail: {
     fontSize: 16,
-    color: '#6B7280',
+    color: '#D1D5DB',
     marginBottom: 12,
   },
   adminBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#e6fffe',
+    backgroundColor: '#1E40AF',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#80e5e8',
+    borderColor: '#3B82F6',
   },
   adminText: {
     marginLeft: 6,
     fontSize: 14,
     fontWeight: '600',
-    color: '#008891',
+    color: '#DBEAFE',
   },
   emptyState: {
     flex: 1,
@@ -222,27 +217,27 @@ const styles = StyleSheet.create({
   emptyStateTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#374151',
+    color: '#F9FAFB',
     marginTop: 16,
     marginBottom: 8,
   },
   emptyStateText: {
     fontSize: 16,
-    color: '#6B7280',
+    color: '#D1D5DB',
     textAlign: 'center',
     lineHeight: 24,
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     marginBottom: 12,
   },
   infoSection: {
     marginBottom: 24,
   },
   infoCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     borderRadius: 16,
     padding: 16,
     shadowColor: '#000',
@@ -259,13 +254,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#F3F4F6',
+    borderBottomColor: '#374151',
   },
   infoIcon: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#374151',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,
@@ -275,19 +270,19 @@ const styles = StyleSheet.create({
   },
   infoLabel: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#9CA3AF',
     marginBottom: 2,
   },
   infoValue: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#111827',
+    color: '#F9FAFB',
   },
   actionsSection: {
     marginBottom: 24,
   },
   actionCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     borderRadius: 16,
     shadowColor: '#000',
     shadowOffset: {
@@ -303,13 +298,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#F3F4F6',
+    borderBottomColor: '#374151',
   },
   actionIcon: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#e6fffe',
+    backgroundColor: '#1E40AF',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,
@@ -320,12 +315,12 @@ const styles = StyleSheet.create({
   actionLabel: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#111827',
+    color: '#F9FAFB',
     marginBottom: 2,
   },
   actionDescription: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#9CA3AF',
   },
   statsSection: {
     marginBottom: 32,
@@ -336,7 +331,7 @@ const styles = StyleSheet.create({
   },
   statCard: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     borderRadius: 16,
     padding: 16,
     alignItems: 'center',
@@ -353,16 +348,16 @@ const styles = StyleSheet.create({
   statNumber: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#00afb9',
+    color: '#60A5FA',
     marginBottom: 4,
   },
   statLabel: {
     fontSize: 12,
-    color: '#6B7280',
+    color: '#9CA3AF',
     textAlign: 'center',
   },
   loginButton: {
-    backgroundColor: '#00afb9',
+    backgroundColor: '#3B82F6',
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 8,

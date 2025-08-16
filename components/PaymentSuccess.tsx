@@ -25,15 +25,19 @@ export default function PaymentSuccess({
 }: PaymentSuccessProps) {
   const navigation = useNavigation();
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  };
+const formatDate = (dateString: string) => {
+  // convert DD/MM/YYYY → YYYY-MM-DD
+  const [day, month, year] = dateString.split('/');
+  const isoString = `${year}-${month}-${day}`;
+
+  const date = new Date(isoString);
+  return date.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
 
   return (
     <View style={styles.container}>
@@ -128,6 +132,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 40,
+    backgroundColor: '#111827',
   },
   successIcon: {
     marginBottom: 24,
@@ -135,13 +140,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     marginBottom: 8,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: 16,
-    color: '#6B7280',
+    color: '#D1D5DB',
     textAlign: 'center',
     lineHeight: 24,
     marginBottom: 32,
@@ -149,7 +154,7 @@ const styles = StyleSheet.create({
   },
   bookingCard: {
     width: '100%',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     borderRadius: 16,
     padding: 20,
     marginBottom: 24,
@@ -171,7 +176,7 @@ const styles = StyleSheet.create({
   bookingId: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#6B7280',
+    color: '#9CA3AF',
   },
   statusBadge: {
     flexDirection: 'row',
@@ -190,12 +195,12 @@ const styles = StyleSheet.create({
   hotelName: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     marginBottom: 4,
   },
   roomType: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#D1D5DB',
     marginBottom: 16,
   },
   bookingDetails: {
@@ -211,13 +216,13 @@ const styles = StyleSheet.create({
   },
   detailLabel: {
     fontSize: 12,
-    color: '#6B7280',
+    color: '#9CA3AF',
     marginBottom: 2,
   },
   detailValue: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#111827',
+    color: '#F9FAFB',
   },
   totalSection: {
     flexDirection: 'row',
@@ -225,12 +230,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 16,
     borderTopWidth: 1,
-    borderTopColor: '#F3F4F6',
+    borderTopColor: '#374151',
   },
   totalLabel: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
   },
   totalAmount: {
     fontSize: 20,
@@ -239,7 +244,7 @@ const styles = StyleSheet.create({
   },
   nextSteps: {
     width: '100%',
-    backgroundColor: '#F0F9FF',
+    backgroundColor: '#1F2937',
     borderRadius: 16,
     padding: 20,
     marginBottom: 24,
@@ -247,7 +252,7 @@ const styles = StyleSheet.create({
   nextStepsTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     marginBottom: 16,
   },
   stepItem: {
@@ -259,12 +264,12 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 12,
     fontSize: 14,
-    color: '#374151',
+    color: '#D1D5DB',
     lineHeight: 20,
   },
   continueButton: {
     width: '100%',
-    backgroundColor: '#00afb9',
+    backgroundColor: '#3B82F6',
     paddingVertical: 16,
     borderRadius: 12,
     alignItems: 'center',

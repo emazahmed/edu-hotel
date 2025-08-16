@@ -149,7 +149,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#111827',
   },
   keyboardView: {
     flex: 1,
@@ -166,12 +166,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
-    color: '#6B7280',
+    color: '#D1D5DB',
   },
   form: {
     marginBottom: 32,
@@ -182,15 +182,15 @@ const styles = StyleSheet.create({
   inputLabel: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#374151',
+    color: '#F9FAFB',
     marginBottom: 8,
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: '#374151',
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 12,
@@ -199,10 +199,10 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 12,
     fontSize: 16,
-    color: '#111827',
+    color: '#F9FAFB',
   },
   loginButton: {
-    backgroundColor: '#00afb9',
+    backgroundColor: '#3B82F6',
     paddingVertical: 16,
     borderRadius: 12,
     alignItems: 'center',
@@ -224,12 +224,12 @@ const styles = StyleSheet.create({
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: '#374151',
   },
   dividerText: {
     marginHorizontal: 16,
     fontSize: 14,
-    color: '#6B7280',
+    color: '#9CA3AF',
   },
   demoSection: {
     alignItems: 'center',
@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
   demoTitle: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#6B7280',
+    color: '#9CA3AF',
     marginBottom: 12,
   },
   demoButtons: {
@@ -247,18 +247,18 @@ const styles = StyleSheet.create({
   demoButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: '#374151',
   },
   demoButtonText: {
     marginLeft: 8,
     fontSize: 14,
     fontWeight: '500',
-    color: '#374151',
+    color: '#F9FAFB',
   },
   footer: {
     flexDirection: 'row',
@@ -267,23 +267,23 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#9CA3AF',
   },
   footerLink: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#00afb9',
+    color: '#60A5FA',
   },
   adminSection: {
     alignItems: 'center',
     marginTop: 24,
     paddingTop: 24,
     borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
+    borderTopColor: '#374151',
   },
   adminSectionText: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#9CA3AF',
     marginBottom: 12,
   },
   adminButton: {

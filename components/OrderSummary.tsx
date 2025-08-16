@@ -109,7 +109,7 @@ export default function OrderSummary({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     borderRadius: 16,
     padding: 20,
     shadowColor: '#000',
@@ -124,24 +124,24 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     marginBottom: 16,
   },
   hotelInfo: {
     marginBottom: 20,
     paddingBottom: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#F3F4F6',
+    borderBottomColor: '#374151',
   },
   hotelName: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     marginBottom: 4,
   },
   roomType: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#D1D5DB',
     marginBottom: 12,
   },
   bookingDetails: {
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   detailText: {
     marginLeft: 8,
     fontSize: 14,
-    color: '#374151',
+    color: '#F9FAFB',
   },
   priceBreakdown: {
     marginBottom: 20,
@@ -167,37 +167,37 @@ const styles = StyleSheet.create({
   },
   priceLabel: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#D1D5DB',
   },
   priceValue: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#111827',
+    color: '#F9FAFB',
   },
   divider: {
     height: 1,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: '#374151',
     marginVertical: 12,
   },
   totalLabel: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
   },
   totalValue: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#00afb9',
+    color: '#60A5FA',
   },
   policies: {
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#374151',
     padding: 16,
     borderRadius: 12,
   },
   policiesTitle: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#374151',
+    color: '#F9FAFB',
     marginBottom: 12,
   },
   policyItem: {
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   policyText: {
     flex: 1,
     fontSize: 12,
-    color: '#6B7280',
+    color: '#D1D5DB',
     lineHeight: 18,
   },
 });

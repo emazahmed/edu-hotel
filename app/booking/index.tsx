@@ -309,16 +309,16 @@ export default function BookingScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#111827',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     paddingHorizontal: 20,
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: '#374151',
   },
   backButton: {
     marginRight: 16,
@@ -329,18 +329,18 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
   },
   headerSubtitle: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#D1D5DB',
   },
   content: {
     flex: 1,
     paddingHorizontal: 20,
   },
   roomInfo: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     padding: 20,
     borderRadius: 16,
     marginTop: 20,
@@ -357,16 +357,16 @@ const styles = StyleSheet.create({
   roomTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     marginBottom: 4,
   },
   roomPrice: {
     fontSize: 16,
-    color: '#2563EB',
+    color: '#60A5FA',
     fontWeight: '600',
   },
   formSection: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     padding: 20,
     borderRadius: 16,
     marginBottom: 16,
@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     marginBottom: 16,
   },
   inputGroup: {
@@ -391,15 +391,15 @@ const styles = StyleSheet.create({
   inputLabel: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#374151',
+    color: '#F9FAFB',
     marginBottom: 8,
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#374151',
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: '#4B5563',
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 12,
@@ -408,13 +408,13 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 12,
     fontSize: 16,
-    color: '#111827',
+    color: '#F9FAFB',
   },
   dateHelper: {
     marginTop: 6,
   },
   dateHelperText: {
-    color: '#00afb9',
+    color: '#60A5FA',
     fontWeight: '500',
   },
   summarySection: {
@@ -424,7 +424,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#2563EB',
+    backgroundColor: '#3B82F6',
     paddingVertical: 16,
     borderRadius: 12,
     marginBottom: 32,
@@ -440,16 +440,16 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#111827',
   },
   modalHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: '#374151',
   },
   closeButton: {
     padding: 4,
@@ -457,7 +457,7 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
   },
   placeholder: {
     width: 32,

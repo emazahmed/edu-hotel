@@ -131,7 +131,7 @@ export default function RoomsScreen() {
         <Text style={styles.headerTitle}>Find Your Perfect Room</Text>
         
         <View style={styles.searchContainer}>
-          <Search size={20} color="#6B7280" />
+          <Search size={20} color="#ffffff" />
           <TextInput
             style={styles.searchInput}
             placeholder="Search hotels or locations..."
@@ -142,7 +142,7 @@ export default function RoomsScreen() {
       </View>
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <Text style={styles.sectionTitle}>Featured Hotels</Text>
+        <Text style={styles.sectionTitle}>Hotels</Text>
         
         {filteredHotels.map(hotel => (
           <TouchableOpacity
@@ -181,33 +181,33 @@ export default function RoomsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#111827',
   },
   header: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     paddingHorizontal: 20,
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: '#374151',
   },
   backButton: {
     marginBottom: 8,
   },
   backButtonText: {
-    color: '#00afb9',
+    color: '#60A5FA',
     fontSize: 16,
     fontWeight: '500',
   },
   headerTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     marginBottom: 16,
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#374151',
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderRadius: 12,
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 12,
     fontSize: 16,
-    color: '#111827',
+    color: '#F9FAFB',
   },
   content: {
     flex: 1,
@@ -225,11 +225,11 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     marginVertical: 20,
   },
   hotelCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     borderRadius: 16,
     marginBottom: 16,
     shadowColor: '#000',
@@ -259,13 +259,13 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     flex: 1,
   },
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#e6fffe',
+    backgroundColor: '#1E40AF',
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 8,
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     fontSize: 14,
     fontWeight: '600',
-    color: '#006064',
+    color: '#DBEAFE',
   },
   locationContainer: {
     flexDirection: 'row',
@@ -284,22 +284,22 @@ const styles = StyleSheet.create({
   cardLocation: {
     marginLeft: 4,
     fontSize: 14,
-    color: '#6B7280',
+    color: '#D1D5DB',
   },
   location: {
     marginLeft: 4,
     fontSize: 16,
-    color: '#6B7280',
+    color: '#D1D5DB',
   },
   cardDescription: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#D1D5DB',
     lineHeight: 20,
     marginBottom: 12,
   },
   description: {
     fontSize: 16,
-    color: '#6B7280',
+    color: '#D1D5DB',
     lineHeight: 24,
     marginBottom: 16,
   },
@@ -311,11 +311,11 @@ const styles = StyleSheet.create({
   priceText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#00afb9',
+    color: '#60A5FA',
   },
   viewRoomsText: {
     fontSize: 14,
-    color: '#00afb9',
+    color: '#60A5FA',
     fontWeight: '500',
   },
   hotelImage: {
@@ -325,7 +325,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   hotelInfo: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     padding: 20,
     borderRadius: 16,
     marginBottom: 20,
@@ -347,7 +347,7 @@ const styles = StyleSheet.create({
   hotelName: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     flex: 1,
   },
   amenitiesContainer: {
@@ -356,7 +356,7 @@ const styles = StyleSheet.create({
   amenitiesTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#111827',
+    color: '#F9FAFB',
     marginBottom: 12,
   },
   amenitiesList: {
@@ -367,7 +367,7 @@ const styles = StyleSheet.create({
   amenityItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#e6fffe',
+    backgroundColor: '#1E40AF',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 20,
@@ -375,14 +375,14 @@ const styles = StyleSheet.create({
   amenityText: {
     marginLeft: 6,
     fontSize: 14,
-    color: '#006064',
+    color: '#DBEAFE',
     fontWeight: '500',
   },
   roomsSection: {
     marginBottom: 20,
   },
   roomCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     borderRadius: 16,
     marginBottom: 16,
     shadowColor: '#000',
@@ -406,17 +406,17 @@ const styles = StyleSheet.create({
   roomType: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     marginBottom: 4,
   },
   roomCapacity: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#D1D5DB',
     marginBottom: 8,
   },
   roomDescription: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#D1D5DB',
     lineHeight: 20,
     marginBottom: 12,
   },
@@ -427,14 +427,14 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   roomAmenityItem: {
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#374151',
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 12,
   },
   roomAmenityText: {
     fontSize: 12,
-    color: '#374151',
+    color: '#D1D5DB',
     fontWeight: '500',
   },
   roomFooter: {
@@ -445,14 +445,14 @@ const styles = StyleSheet.create({
   roomPrice: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#00afb9',
+    color: '#60A5FA',
   },
   roomPriceLabel: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#9CA3AF',
   },
   bookButton: {
-    backgroundColor: '#00afb9',
+    backgroundColor: '#3B82F6',
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 8,

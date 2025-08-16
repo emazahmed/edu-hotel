@@ -178,24 +178,24 @@ export default function BookingsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#111827',
   },
   header: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     paddingHorizontal: 20,
     paddingVertical: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: '#374151',
   },
   headerTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     marginBottom: 4,
   },
   headerSubtitle: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#D1D5DB',
   },
   content: {
     flex: 1,
@@ -212,18 +212,18 @@ const styles = StyleSheet.create({
   emptyStateTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#374151',
+    color: '#F9FAFB',
     marginTop: 16,
     marginBottom: 8,
   },
   emptyStateText: {
     fontSize: 16,
-    color: '#6B7280',
+    color: '#D1D5DB',
     textAlign: 'center',
     lineHeight: 24,
   },
   bookingCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1F2937',
     borderRadius: 16,
     padding: 20,
     marginBottom: 16,
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
   hotelName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F9FAFB',
     flex: 1,
   },
   statusBadge: {
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
   },
   roomType: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#D1D5DB',
     marginBottom: 16,
   },
   bookingDetails: {
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
   detailText: {
     marginLeft: 8,
     fontSize: 14,
-    color: '#374151',
+    color: '#F9FAFB',
   },
   bookingFooter: {
     flexDirection: 'row',
@@ -282,37 +282,37 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     paddingTop: 16,
     borderTopWidth: 1,
-    borderTopColor: '#F3F4F6',
+    borderTopColor: '#374151',
   },
   totalPrice: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#00afb9',
+    color: '#60A5FA',
   },
   priceLabel: {
     fontSize: 12,
-    color: '#6B7280',
+    color: '#9CA3AF',
   },
   cancelButton: {
-    backgroundColor: '#FEF2F2',
+    backgroundColor: '#1F2937',
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#FECACA',
+    borderColor: '#EF4444',
   },
   cancelButtonText: {
-    color: '#DC2626',
+    color: '#EF4444',
     fontSize: 14,
     fontWeight: '500',
   },
   bookingDate: {
     fontSize: 12,
-    color: '#9CA3AF',
+    color: '#6B7280',
     fontStyle: 'italic',
   },
   loginButton: {
-    backgroundColor: '#00afb9',
+    backgroundColor: '#3B82F6',
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 8,
