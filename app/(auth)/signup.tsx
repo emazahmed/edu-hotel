@@ -6,7 +6,7 @@ import { Mail, Lock, Eye, EyeOff, User, Phone, ArrowLeft, Shield } from 'lucide-
 import { useAuth } from '@/contexts/AuthContext';
 
 export default function SignupScreen() {
-  const { login } = useAuth();
+  const { login, signup } = useAuth();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -53,23 +53,27 @@ export default function SignupScreen() {
     setIsLoading(true);
     
     try {
-      // In a real app, this would create a new user account
-      // For demo purposes, we'll just log them in with the demo user account
-      Alert.alert(
-        'Account Created!',
-        'Your account has been created successfully. You will be logged in with the demo account.',
-        [
-          {
-            text: 'OK',
-            onPress: async () => {
-              const success = await login('john.doe@example.com', 'password123');
-              if (success) {
-                router.replace('/(tabs)');
-              }
+      const success = await signup({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        password: formData.password,
+      });
+
+      if (success) {
+        Alert.alert(
+          'Account Created!',
+          'Your account has been created successfully and you are now logged in.',
+          [
+            {
+              text: 'OK',
+              onPress: () => router.replace('/(tabs)')
             }
-          }
-        ]
-      );
+          ]
+        );
+      } else {
+        Alert.alert('Error', 'An account with this email already exists. Please use a different email or try logging in.');
+      }
     } catch (error) {
       Alert.alert('Error', 'Signup failed. Please try again.');
     } finally {
