@@ -17,14 +17,6 @@ Users can browse and book rooms from a list of hotels, while an **admin panel** 
 
 * View all user bookings
 * Approve, reject, or cancel bookings
-
----
-## 🔗 Backend API
-
-⚠️ This repo only contains the **frontend mobile app**.
-The app requires a backend API to function (for hotel listings, bookings, and admin management).
-👉 Update the API base URL in the project config (`src/config.js` or `.env`) to point to your backend server.
-
 ---
 ## 🧑‍💻 Contributing
 
